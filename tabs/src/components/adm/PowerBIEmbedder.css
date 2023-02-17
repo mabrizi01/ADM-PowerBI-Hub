@@ -1,0 +1,14 @@
+.report-style-class-old {
+  height: 600px;
+  width: 100%;
+}
+.report-style-class {
+  /* width: 100%; */
+  height:inherit;
+}
+
+.App {
+  text-align: center;
+  height: 100%;
+}
+

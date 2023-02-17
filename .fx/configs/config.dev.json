@@ -1,0 +1,18 @@
+{
+    "$schema": "https://aka.ms/teamsfx-env-config-schema",
+    "description": "You can customize the TeamsFx config for different environments. Visit https://aka.ms/teamsfx-env-config to learn more about this.",
+    "manifest": {
+        "appName": {
+            "short": "ADM-PowerBI-Hub",
+            "full": "Full name for ADM-PowerBI-Hub"
+        },
+        "description": {
+            "short": "First internal Marketplace Teams App from the Ministry of Health Portugal",
+            "full": "Provide Ministry of Health Executives and FLW with data insights to improve focus and outcomes from clinical practice"
+        },
+        "icons": {
+            "color": "resources/color.png",
+            "outline": "resources/outline.png"
+        }
+    }
+}

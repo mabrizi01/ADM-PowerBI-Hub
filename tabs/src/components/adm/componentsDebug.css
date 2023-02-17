@@ -1,0 +1,56 @@
+div.debug
+{
+    border-width: 2px;
+    border-style: solid;
+    border-color: red;
+}
+
+div.debug-blue
+{
+    
+    border-width: 2px;
+    border-style: solid;
+    border-color: blue;
+}
+
+div.debug-green
+{
+    border-width: 2px;
+    border-style: solid;
+    border-color: green;
+}
+
+div.debug-top
+{
+    
+    border-width: 2px;
+    border-style: solid;
+    border-color: purple;
+}
+
+div.debug-bottom
+{
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(87, 129, 4);
+}
+
+div.debug-left
+{
+    border-width: 2px;
+    border-style: solid;
+    border-color: orangered;
+}
+div.debug-right
+{
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(49, 29, 111);
+}
+
+.debug-border
+{
+    border-width: 2px;
+    border-style: solid;
+    border-color: red;
+}

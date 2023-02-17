@@ -1,0 +1,39 @@
+{
+    "solution": {
+        "provisionSucceeded": true,
+        "teamsAppTenantId": "7e98e324-b2c6-486a-b6c7-4ba3a4d5befb",
+        "subscriptionId": "5625c6c0-4ce6-47f5-be11-7c6932205847",
+        "subscriptionName": "MABRIZI VSE (mbonline19)",
+        "tenantId": "7e98e324-b2c6-486a-b6c7-4ba3a4d5befb",
+        "needCreateResourceGroup": false,
+        "resourceGroupName": "RG-TEAMS-ADM-POWERBI-HUB",
+        "location": "westeurope",
+        "resourceNameSuffix": "5f5e27"
+    },
+    "fx-resource-appstudio": {
+        "tenantId": "7e98e324-b2c6-486a-b6c7-4ba3a4d5befb",
+        "teamsAppId": "b635db5c-5d3b-410d-9ca5-532386d715ac"
+    },
+    "fx-resource-frontend-hosting": {
+        "indexPath": "/index.html#",
+        "domain": "admpowerbi98ca4btab.z6.web.core.windows.net",
+        "endpoint": "https://admpowerbi98ca4btab.z6.web.core.windows.net",
+        "storageResourceId": "/subscriptions/5625c6c0-4ce6-47f5-be11-7c6932205847/resourceGroups/RG-TEAMS-ADM-POWERBI-HUB/providers/Microsoft.Storage/storageAccounts/admpowerbi98ca4btab"
+    },
+    "fx-resource-aad-app-for-teams": {
+        "clientId": "55fc8a31-ed4a-4b0f-8327-0d017b958cc6",
+        "clientSecret": "{{fx-resource-aad-app-for-teams.clientSecret}}",
+        "objectId": "32d939d0-f01e-4366-a2e4-6b5042a6264b",
+        "oauth2PermissionScopeId": "077c0541-e860-42dc-8adb-6d78c9f59483",
+        "tenantId": "7e98e324-b2c6-486a-b6c7-4ba3a4d5befb",
+        "oauthHost": "https://login.microsoftonline.com",
+        "oauthAuthority": "https://login.microsoftonline.com/7e98e324-b2c6-486a-b6c7-4ba3a4d5befb",
+        "applicationIdUris": "api://admpowerbi98ca4btab.z6.web.core.windows.net/55fc8a31-ed4a-4b0f-8327-0d017b958cc6",
+        "frontendEndpoint": "https://admpowerbi98ca4btab.z6.web.core.windows.net"
+    },
+    "fx-resource-identity": {
+        "identityName": "admpowerbi98ca4b",
+        "identityResourceId": "/subscriptions/5625c6c0-4ce6-47f5-be11-7c6932205847/resourceGroups/RG-TEAMS-ADM-POWERBI-HUB/providers/Microsoft.ManagedIdentity/userAssignedIdentities/admpowerbi98ca4b",
+        "identityClientId": "c76fa353-8d99-4f8c-b2c6-88afe0dc0a73"
+    }
+}

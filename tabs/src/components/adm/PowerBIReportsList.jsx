@@ -4,47 +4,51 @@ import PowerBIReportDetails from "./PowerBIReportDetails";
 import { TeamsFxContext } from "../Context";
 
 
-function setReportsListByAzure_v1(user, setReportsListDelegate)
-{
-    var url = "https://embeddingpowerbireport.azurewebsites.net/api/GetReportsList";
-    const myBody = {
-                    "upn": user.userName,
-                   };
+// function setReportsListByAzure_v1(user, setReportsListDelegate)
+// {
+//     var url = "https://embeddingpowerbireport.azurewebsites.net/api/GetReportsList";
+//     const myBody = {
+//                     "upn": user.userName,
+//                    };
                   
-  const myInit = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'},
-      //mode: 'no-cors',
-      cache: 'default', 
-      body: JSON.stringify(myBody)  
-    };
+//   const myInit = {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'},
+//       //mode: 'no-cors',
+//       cache: 'default', 
+//       body: JSON.stringify(myBody)  
+//     };
    
 
     
-    fetch(url, myInit)
-    .then((response) => response.json())
-    .then((response) => 
-        {
-            console.log(`response received from Azure Function '${url}'`);
-            console.log(response);
-            setReportsListDelegate(response);
-        })
-    .catch((error) => console.log(error));
+//     fetch(url, myInit)
+//     .then((response) => response.json())
+//     .then((response) => 
+//         {
+//             console.log(`response received from Azure Function '${url}'`);
+//             console.log(response);
+//             setReportsListDelegate(response);
+//         })
+//     .catch((error) => console.log(error));
 
-}
+// }
 
 function setReportsListByAzure(user, teamsUserCredential, setReportsListDelegate)
 {
-    const body = {
-                    "upn": user.userName,
-                   };
-                  
-    CallFunction("GetReportsList", body, teamsUserCredential).then((data) => {
-        console.log("AzureFunctions | GetReportsList | data", data);
-        setReportsListDelegate(data);
-    })
-    .catch((error) => console.log(error));
+    if (user.userName !== "")
+    {
+        const body = {
+                        "upnCaller": user.userName,
+                        "upnRequested": user.requestedUserName,
+                    };
+        
+        CallFunction("GetReportsList", body, teamsUserCredential).then((data) => {
+            console.log("AzureFunctions | GetReportsList | data", data);
+            setReportsListDelegate(data);
+        })
+        .catch((error) => console.log(error));
+    }
 }
 
 function updateReportsList(user, teamsUserCredential, setReportsListDelegate)

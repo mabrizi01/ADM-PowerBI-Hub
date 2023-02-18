@@ -34,6 +34,6 @@
     "fx-resource-identity": {
         "identityName": "admpowerbi98ca4b",
         "identityResourceId": "/subscriptions/5625c6c0-4ce6-47f5-be11-7c6932205847/resourceGroups/RG-TEAMS-ADM-POWERBI-HUB/providers/Microsoft.ManagedIdentity/userAssignedIdentities/admpowerbi98ca4b",
-        "identityClientId": "c76fa353-8d99-4f8c-b2c6-88afe0dc0a73"
+        "identityClientId": "f85fd1c7-fe7c-483a-884b-efc7c3bc666a"
     }
 }

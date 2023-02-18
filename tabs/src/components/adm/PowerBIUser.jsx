@@ -6,7 +6,7 @@ function PowerBIUser(props)
     
     return (
         <div>
-            <strong>Report view for: </strong>{user.fullName} - ({user.userName})
+            <strong>Report view for: </strong>{user.requestedFullName} - ({user.requestedUserName})
         </div>
     );
 }

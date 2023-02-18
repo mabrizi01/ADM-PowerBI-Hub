@@ -15,19 +15,23 @@ function PowerBIHub()
 {
     function onSwitchUser()
     {
-        if (userInfo.userName != "mrossi@mbonline19.onmicrosoft.com")
+        
+        if (userInfo.requestedUserName != "mrossi@mbonline19.onmicrosoft.com")
         {
-            setUserInfo({
-                fullName: "Mario Rossi", 
-                userName: "mrossi@mbonline19.onmicrosoft.com"
-            });
+            const newUserInfo = {...userInfo, 
+                                    requestedFullName: "Mario Rossi", 
+                                    requestedUserName: "mrossi@mbonline19.onmicrosoft.com"
+                                };
+            setUserInfo(newUserInfo);
         }
         else
         {
-            setUserInfo({
-                fullName: "Luca Verdi", 
-                userName: "lverdi@mbonline19.onmicrosoft.com"
-            });
+            const newUserInfo = {...userInfo, 
+                requestedFullName: "Luca Verdi", 
+                requestedUserName: "lverdi@mbonline19.onmicrosoft.com"
+            };
+            setUserInfo(newUserInfo);
+            
         }
         
     }
@@ -35,7 +39,7 @@ function PowerBIHub()
     function onReportOpen(report) 
     {
         console.log("PowerBIHub | onReportOpen: " + report.name);
-        var newReportInfo = {...report};
+        var newReportInfo = {...report, user: userInfo};
         
         //Update local state
         setCurrentReport(newReportInfo); 
@@ -64,48 +68,24 @@ function PowerBIHub()
 
     //set userInfo
     const { teamsUserCredential } = useContext(TeamsFxContext);
-    const [ userInfo, setUserInfo] =  useState({});
+    const [ userInfo, setUserInfo] =  useState({fullName: '', userName: '', requestedFullName: '', requestedUserName: ''});
     useData(async () => {
         if (teamsUserCredential) 
         {
-            teamsUserCredential.getUserInfo().then((userInfo) => { 
+            teamsUserCredential.getUserInfo().then((teamsUserInfo) => { 
                 console.log("PowerBIHub | updating userInfo (setUserInfo)");
                 
                 setUserInfo({
-                    fullName: userInfo.displayName, 
-                    userName: userInfo.preferredUserName
+                    fullName: teamsUserInfo.displayName, 
+                    userName: teamsUserInfo.preferredUserName,
+                    requestedFullName: teamsUserInfo.displayName,
+                    requestedUserName: teamsUserInfo.preferredUserName
                 }); 
             });
         }
     });
 
-    //set tokenContextInfo
-    // const { teamsContextCredential } = useContext(TeamsFxContext);
-    // const [ tokenContextInfo, setTokenContextInfo] = useState('');
-    // useData(async () => {
-    //             if (teamsUserCredential) 
-    //             {
-    //                 teamsUserCredential.getToken().then((tokenInfo) => {
-    //                     console.log("PowerBIHub | tokenInfo: " + JSON.stringify(tokenInfo));
-    //                     setTokenContextInfo(tokenInfo);
-    //                 });
-    //             }
-    //         });
-
-
-    //set tokenContext
-    // const [tokenContext, setTokenContext] = useState('');
-    // const { loading, data, error } = useData(async () => {
-    //     if (teamsUserCredential) {
-    //         const tokenInfo = await teamsUserCredential.getToken();
-    //         console.log("PowerBIHub | tokenInfo: " + JSON.stringify(tokenInfo));
-    //         return tokenInfo;
-    //     }
-    //     else{
-    //         console.log("PowerBIHub | teamsUserCredential is null");
-    //     }
-    //     });
-    // const token = (loading || error) ? "": data;
+    
 
     //currentReportInfo
     const [currentReportInfo, setCurrentReport] = useState({});

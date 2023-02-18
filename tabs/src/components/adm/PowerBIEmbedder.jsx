@@ -46,7 +46,10 @@ function callAzureFunction_CreateEmbeddingCode_v1(reportDetails, setResponseConf
  
     function callAzureFunction_CreateEmbeddingCode(reportDetails, teamsUserCredential, setResponseConfigHandler)
     {
+      console.log("callAzureFunction_CreateEmbeddingCode: " + JSON.stringify( reportDetails));
+
       const body = {
+        "upnCaller": reportDetails.user.userName,
         "groupId": reportDetails.groupId,
         "reportId": reportDetails.reportId,
         "param1": reportDetails.param1,
@@ -55,6 +58,8 @@ function callAzureFunction_CreateEmbeddingCode_v1(reportDetails, setResponseConf
         "param4": reportDetails.param4,
         "param5": reportDetails.param5
     };
+    console.log("callAzureFunction_CreateEmbeddingCode | body", body);
+    
         CallFunction("CreateEmbeddingCode", body, teamsUserCredential).then((data) => {
         console.log("AzureFunctions | CreateEmbeddingCode | data", data);
         setResponseConfigHandler(data);

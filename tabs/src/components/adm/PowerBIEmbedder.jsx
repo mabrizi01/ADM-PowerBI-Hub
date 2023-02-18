@@ -10,7 +10,7 @@ function callAzureFunction_CreateEmbeddingCode_v1(reportDetails, setResponseConf
 
     console.log("callAzureFunction_CreateEmbeddingCode: " + JSON.stringify( reportDetails));
 
-      var url = "https://embeddingpowerbireport.azurewebsites.net/api/CreateEmbeddingCode";
+      var url = "https://embeddingpowerbireportdev.azurewebsites.net/api/CreateEmbeddingCode";
       // const myBody = {
       //                   "groupId": "58983dbb-1358-44ce-aa9c-897edd6d034d",
       //                   "reportId": "4dd26748-294e-4544-a024-54579bdb3049",

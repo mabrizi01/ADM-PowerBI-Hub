@@ -15,6 +15,9 @@ function PowerBIReportDetails(props) {
                                   console.log("PowerBIReportDetails | Report loaded: " + reportInfo.name);
                                   onReportOpen(reportInfo);
                                 }}>Show Report</button>
+        <button onClick={() => {
+          onReportOpen({});
+        }}>Close Report</button>
     </div>
   );
 }   

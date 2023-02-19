@@ -39,11 +39,15 @@ function PowerBIHub()
     function onReportOpen(report) 
     {
         console.log("PowerBIHub | onReportOpen: " + report.name);
-        var newReportInfo = {...report, user: userInfo};
         
         //Update local state
+        var newReportInfo = {...report, user: userInfo};
         setCurrentReport(newReportInfo); 
     }
+
+    //Set currentReportInfo
+    const emptyReportInfo={};
+    const [currentReportInfo, setCurrentReport] = useState(emptyReportInfo);
 
     //Set infoContext
     const [infoContext, setInfoContext] = useState(
@@ -85,12 +89,6 @@ function PowerBIHub()
         }
     });
 
-    
-
-    //currentReportInfo
-    const [currentReportInfo, setCurrentReport] = useState({});
-    
-    
     return (
         <div className="hubMain debug">
             <header>

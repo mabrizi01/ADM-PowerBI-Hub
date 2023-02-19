@@ -44,144 +44,155 @@ function callAzureFunction_CreateEmbeddingCode_v1(reportDetails, setResponseConf
                       .catch((error) => console.log(error));
     }
  
-    function callAzureFunction_CreateEmbeddingCode(reportDetails, teamsUserCredential, setResponseConfigHandler)
-    {
-      console.log("callAzureFunction_CreateEmbeddingCode: " + JSON.stringify( reportDetails));
+      
 
-      const body = {
-        "upnCaller": reportDetails.user.userName,
-        "groupId": reportDetails.groupId,
-        "reportId": reportDetails.reportId,
-        "param1": reportDetails.param1,
-        "param2": reportDetails.param2,
-        "param3": reportDetails.param3,
-        "param4": reportDetails.param4,
-        "param5": reportDetails.param5
-    };
-    console.log("callAzureFunction_CreateEmbeddingCode | body", body);
-    
-        CallFunction("CreateEmbeddingCode", body, teamsUserCredential).then((data) => {
-        console.log("AzureFunctions | CreateEmbeddingCode | data", data);
-        setResponseConfigHandler(data);
-    })
-    .catch((error) => console.log(error));
-  }
-
-function RenderEmptyContent(props)
- {
-  console.log("RenderEmptyContent");
-  return (
-          
-    <div>
-      <h1>No Report to show</h1>
-      </div>
-    )
- }
-
- function RenderTest(props)
- {
-  const {reportInfo} = props;
-  console.log("RenderTest");
-  return (
-          
-    <div>
-      <h1>RenderTest </h1>
-      <h2>Report Name: {reportInfo.name}</h2>
-      <h2>groupId: {reportInfo.groupId}</h2>
-      <h2>reportId: {reportInfo.reportId}</h2>
-      </div>
-    )
- }
-
-function RenderEmbedder(props)
-{
-  const {reportInfo} = props;
-  const [responseConfig,  setResponseConfig] = useState({});
-  const teamsUserCredential = useContext(TeamsFxContext).teamsUserCredential;
-
-  //When the reportDetails property changes, update the report area
-  useEffect(() => 
+  function PowerBIEmbedder(props) 
   {
-    callAzureFunction_CreateEmbeddingCode(reportInfo, teamsUserCredential,setResponseConfig);
-  }, [reportInfo]);
-  
+    const {reportInfo} = props;
+    const emptyResponseConfig = {ReportId: "", EmbedUrl: "", EmbedToken: ""};
+    const [responseConfig,  setResponseConfig] = useState(emptyResponseConfig);
+    const teamsUserCredential = useContext(TeamsFxContext).teamsUserCredential;
 
-  return (
-        <div className="App">
-              <PowerBIEmbed
-                  embedConfig={{
-                    //hostname: "https://app.powerbigov.us/",
-                    type: "report", // Supported types: report, dashboard, tile, visual and qna
-                    id: responseConfig.ReportId,
-                    embedUrl: responseConfig.EmbedUrl,
-                    accessToken: responseConfig.EmbedToken,
-                    tokenType: models.TokenType.Embed,
-                    settings: {
-                      panes: {
-                        filters: {
-                          expanded: false,
-                          visible: false,
-                        },
-                        pageNavigation: {
-                          visible: true,
-                        },
-                      },
-                      background: models.BackgroundType.Transparent,
-                    },
-                  }}
-                  eventHandlers={
-                    new Map([
-                      [
-                        "loaded",
-                        function () {
-                          console.log("Report loaded");
-                        },
-                      ],
-                      [
-                        "rendered",
-                        function () {
-                          console.log("Report rendered");
-                        },
-                      ],
-                      [
-                        "error",
-                      function (event) {
-                          console.log(event.detail);
-                        },
-                      ],
-                    ])
-                  }
-                  cssClassName={"report-style-class"}
-                />
-            
+    function AzureFunction_CreateEmbeddingCode(reportDetails, teamsUserCredential, setResponseConfigHandler)
+    {
+        console.log("calling AzureFunction_CreateEmbeddingCode | reportDetails: " + JSON.stringify( reportDetails));
+
+        if (reportDetails != undefined && reportDetails != null 
+          && reportDetails.reportId != undefined && reportDetails.reportId != null)
+        {
+            const body = {
+              "upnCaller": reportDetails.user.userName,
+              "tenantId": reportDetails.tenantID,
+              "groupId": reportDetails.groupId,
+              "reportId": reportDetails.reportId,
+              "param1": reportDetails.param1,
+              "param2": reportDetails.param2,
+              "param3": reportDetails.param3,
+              "param4": reportDetails.param4,
+              "param5": reportDetails.param5
+            }
+
+          console.log("calling AzureFunctions CreateEmbeddingCode | body: ", body);
+      
+          CallFunction("CreateEmbeddingCode", body, teamsUserCredential).then((data) => 
+            {
+              console.log("called AzureFunctions | CreateEmbeddingCode | data: ", data);
+              setResponseConfigHandler(data);
+            })
+      .catch((error) => console.log(error));
+        }
+      
+    }  
+
+    //When the reportDetails property changes, update the report area
+    useEffect(() => 
+    {
+        setResponseConfig(emptyResponseConfig);
+        AzureFunction_CreateEmbeddingCode(reportInfo, teamsUserCredential,setResponseConfig);
+    }, [reportInfo]);
+
+    function RenderEmptyContent(props)
+    {
+      console.log("RenderEmptyContent");
+      return (
+              
+        <div>
+          <h1>No Report to show</h1>
           </div>
-        );
-}
+        )
+    }
 
-function PowerBIEmbedder(props) 
-{
-  const {reportInfo} = props;
-  
-  
-  console.log("PowerBIEmbedder: " + JSON.stringify(reportInfo));
-
-  if (reportInfo === undefined || reportInfo === null 
-    || reportInfo.groupId===undefined || reportInfo.groupId === '' 
-    || reportInfo.reportId===undefined || reportInfo.reportId === '' )
-  {
-    return RenderEmptyContent(props);
-  }
-  else
-  {
-    if (1 == 1)
+    function RenderTest(props)
     {
-        return RenderEmbedder(props) 
+      console.log("RenderTest");
+      return (
+              
+        <div>
+          <h1>RenderTest </h1>
+          <h2>Report Name: {reportInfo.name}</h2>
+          <h2>Tenant Id: {reportInfo.tenantID}</h2>
+          <h2>Group Id: {reportInfo.groupId}</h2>
+          <h2>Report Id: {reportInfo.reportId}</h2>
+          </div>
+        )
+    }
+
+    function RenderEmbedder(props)
+    {
+      console.log("RenderEmbedder: " + JSON.stringify(responseConfig));
+
+      return (
+            <div className="App">
+                  <PowerBIEmbed
+                      embedConfig={{
+                        //hostname: "https://app.powerbigov.us/",
+                        type: "report", // Supported types: report, dashboard, tile, visual and qna
+                         
+                        id: responseConfig.ReportId,
+                        embedUrl: responseConfig.EmbedUrl,
+                        accessToken: responseConfig.EmbedToken,
+                        tokenType: models.TokenType.Embed,
+                        settings: {
+                          panes: {
+                            filters: {
+                              expanded: false,
+                              visible: false,
+                            },
+                            pageNavigation: {
+                              visible: true,
+                            },
+                          },
+                          background: models.BackgroundType.Transparent,
+                        },
+                      }}
+                      eventHandlers={
+                        new Map([
+                          [
+                            "loaded",
+                            function () {
+                              console.log("Report loaded");
+                            },
+                          ],
+                          [
+                            "rendered",
+                            function () {
+                              console.log("Report rendered");
+                            },
+                          ],
+                          [
+                            "error",
+                          function (event) {
+                              console.log(event.detail);
+                            },
+                          ],
+                        ])
+                      }
+                      cssClassName={"report-style-class"}
+                    />
+                
+              </div>
+            );
+    }
+
+    const renderEmptyContent = reportInfo === undefined || reportInfo === null 
+    || reportInfo.groupId===undefined || reportInfo.groupId === '' 
+    || reportInfo.reportId===undefined || reportInfo.reportId === '';
+
+    if (renderEmptyContent)
+    {
+      return RenderEmptyContent(props);
     }
     else
     {
-        return RenderTest(props);
-    }      
-  }     
+      if (1 == 1)
+      {
+          return RenderEmbedder(props) 
+      }
+      else
+      {
+          return RenderTest(props);
+      }      
+    }     
 }
 
 export default PowerBIEmbedder;

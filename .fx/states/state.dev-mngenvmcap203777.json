@@ -1,0 +1,39 @@
+{
+    "solution": {
+        "provisionSucceeded": true,
+        "teamsAppTenantId": "c9d7632f-9235-4b36-ad8f-ff8808ddfb96",
+        "subscriptionId": "14fd260b-bdfb-4482-81f6-10c56bcc2945",
+        "subscriptionName": "MCAPS-MABRIZI non-production External Subscription",
+        "tenantId": "c9d7632f-9235-4b36-ad8f-ff8808ddfb96",
+        "needCreateResourceGroup": true,
+        "resourceGroupName": "RG-TEAMS-ADM-POWERBI-HUB-FRONTEND",
+        "location": "West Europe",
+        "resourceNameSuffix": "375c2a"
+    },
+    "fx-resource-appstudio": {
+        "tenantId": "c9d7632f-9235-4b36-ad8f-ff8808ddfb96",
+        "teamsAppId": "15913445-24d6-404b-b46e-9524160406ab"
+    },
+    "fx-resource-frontend-hosting": {
+        "indexPath": "/index.html#",
+        "domain": "admpowerbidevm5c6320tab.z6.web.core.windows.net",
+        "endpoint": "https://admpowerbidevm5c6320tab.z6.web.core.windows.net",
+        "storageResourceId": "/subscriptions/14fd260b-bdfb-4482-81f6-10c56bcc2945/resourceGroups/RG-TEAMS-ADM-POWERBI-HUB-FRONTEND/providers/Microsoft.Storage/storageAccounts/admpowerbidevm5c6320tab"
+    },
+    "fx-resource-aad-app-for-teams": {
+        "clientId": "6d68640b-b4d9-4bcf-9462-1c869c84dc9e",
+        "clientSecret": "{{fx-resource-aad-app-for-teams.clientSecret}}",
+        "objectId": "b788de7a-48a2-4d93-8029-5294c5e93c19",
+        "oauth2PermissionScopeId": "dd8341bc-e3c1-47a9-843e-b4caa0cdded0",
+        "tenantId": "c9d7632f-9235-4b36-ad8f-ff8808ddfb96",
+        "oauthHost": "https://login.microsoftonline.com",
+        "oauthAuthority": "https://login.microsoftonline.com/c9d7632f-9235-4b36-ad8f-ff8808ddfb96",
+        "applicationIdUris": "api://admpowerbidevm5c6320tab.z6.web.core.windows.net/6d68640b-b4d9-4bcf-9462-1c869c84dc9e",
+        "frontendEndpoint": "https://admpowerbidevm5c6320tab.z6.web.core.windows.net"
+    },
+    "fx-resource-identity": {
+        "identityName": "admpowerbidevm5c6320",
+        "identityResourceId": "/subscriptions/14fd260b-bdfb-4482-81f6-10c56bcc2945/resourceGroups/RG-TEAMS-ADM-POWERBI-HUB-FRONTEND/providers/Microsoft.ManagedIdentity/userAssignedIdentities/admpowerbidevm5c6320",
+        "identityClientId": "481f1e30-917b-43c6-832c-2cd1d8eb5352"
+    }
+}

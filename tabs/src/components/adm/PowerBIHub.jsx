@@ -16,11 +16,11 @@ function PowerBIHub()
     function onSwitchUser()
     {
         
-        if (userInfo.requestedUserName != "mrossi@mbonline19.onmicrosoft.com")
+        if (userInfo.requestedUserName != "mrossi@MngEnvMCAP203777.onmicrosoft.com")
         {
             const newUserInfo = {...userInfo, 
                                     requestedFullName: "Mario Rossi", 
-                                    requestedUserName: "mrossi@mbonline19.onmicrosoft.com"
+                                    requestedUserName: "mrossi@MngEnvMCAP203777.onmicrosoft.com"
                                 };
             setUserInfo(newUserInfo);
         }
@@ -28,7 +28,7 @@ function PowerBIHub()
         {
             const newUserInfo = {...userInfo, 
                 requestedFullName: "Luca Verdi", 
-                requestedUserName: "lverdi@mbonline19.onmicrosoft.com"
+                requestedUserName: "lverdi@MngEnvMCAP203777.onmicrosoft.com"
             };
             setUserInfo(newUserInfo);
             

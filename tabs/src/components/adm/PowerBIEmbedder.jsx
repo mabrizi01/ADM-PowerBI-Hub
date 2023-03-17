@@ -53,6 +53,18 @@ function callAzureFunction_CreateEmbeddingCode_v1(reportDetails, setResponseConf
     const [responseConfig,  setResponseConfig] = useState(emptyResponseConfig);
     const teamsUserCredential = useContext(TeamsFxContext).teamsUserCredential;
 
+    const renderEmptyContent = reportInfo === undefined || reportInfo === null 
+      || reportInfo.groupId===undefined || reportInfo.groupId === '' 
+      || reportInfo.reportId===undefined || reportInfo.reportId === '';
+
+    //When the reportDetails property changes, update the report area
+    useEffect(() => 
+    {
+        setResponseConfig(emptyResponseConfig);
+        AzureFunction_CreateEmbeddingCode(reportInfo, teamsUserCredential,setResponseConfig);
+    }, [reportInfo]);
+
+
     function AzureFunction_CreateEmbeddingCode(reportDetails, teamsUserCredential, setResponseConfigHandler)
     {
         console.log("calling AzureFunction_CreateEmbeddingCode | reportDetails: " + JSON.stringify( reportDetails));
@@ -62,6 +74,7 @@ function callAzureFunction_CreateEmbeddingCode_v1(reportDetails, setResponseConf
         {
             const body = {
               "upnCaller": reportDetails.user.userName,
+              "powerBIReportId": reportDetails.powerBIReportID,
               "tenantId": reportDetails.tenantID,
               "groupId": reportDetails.groupId,
               "reportId": reportDetails.reportId,
@@ -83,13 +96,6 @@ function callAzureFunction_CreateEmbeddingCode_v1(reportDetails, setResponseConf
         }
       
     }  
-
-    //When the reportDetails property changes, update the report area
-    useEffect(() => 
-    {
-        setResponseConfig(emptyResponseConfig);
-        AzureFunction_CreateEmbeddingCode(reportInfo, teamsUserCredential,setResponseConfig);
-    }, [reportInfo]);
 
     function RenderEmptyContent(props)
     {
@@ -174,10 +180,7 @@ function callAzureFunction_CreateEmbeddingCode_v1(reportDetails, setResponseConf
             );
     }
 
-    const renderEmptyContent = reportInfo === undefined || reportInfo === null 
-    || reportInfo.groupId===undefined || reportInfo.groupId === '' 
-    || reportInfo.reportId===undefined || reportInfo.reportId === '';
-
+    
     if (renderEmptyContent)
     {
       return RenderEmptyContent(props);

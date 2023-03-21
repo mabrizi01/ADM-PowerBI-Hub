@@ -2,7 +2,13 @@ function PowerBIReportDetails(props) {
   const {
     reportInfo,
     onReportOpen } = props;
-  
+    
+    function sleep(seconds) 
+    {
+      var e = new Date().getTime() + (seconds * 1000);
+      while (new Date().getTime() <= e) {}
+    }
+
   return (
     <div className="box">
         <h4><strong>Name: </strong>{reportInfo.name}</h4> 
@@ -15,7 +21,11 @@ function PowerBIReportDetails(props) {
         <h4><strong>Description: </strong>{reportInfo.description}</h4>
         <button onClick={() => {
                                   console.log("PowerBIReportDetails | Report loaded: " + reportInfo.name);
-                                  onReportOpen(reportInfo);
+                                  onReportOpen({tenantID:'', groupId:'', reportId:''});                        
+                                  setTimeout(() => {
+                                    onReportOpen(reportInfo);
+                                  }, 100);
+                                  //onReportOpen(reportInfo);
                                 }}>Show Report</button>
         <button onClick={() => {
           onReportOpen({});

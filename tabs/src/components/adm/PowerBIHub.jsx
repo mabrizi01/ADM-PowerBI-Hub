@@ -10,7 +10,6 @@ import PowerBIEmbedder from './PowerBIEmbedder';
 import { app, Context } from "@microsoft/teams-js";
 import TestFunctions, { CreateEmbeddingCode, GetReportsList } from './AzureFunctions';
 
-
 function PowerBIHub()
 {
     function onSwitchUser()
